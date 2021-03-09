@@ -1,7 +1,3 @@
-from tkinter import *
-from app.login import Application
+from app.controle_principal import ControlePrincipal
 
-root = Tk()
-app = Application(master=root)
-app.mainloop()
-root.destroy()
+ControlePrincipal().inicializar()
