@@ -1,3 +1,3 @@
-from app.controle_principal import ControlePrincipal
+from app.menu.controller import ControlePrincipal
 
 ControlePrincipal().inicializar()

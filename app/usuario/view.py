@@ -9,12 +9,11 @@ class TelaUsuarios(AbstractView):
     def autentica_usuario(self):
         tela = TelaAutenticacao()
         botao, user = tela.show()
-        print(botao)
         user['action'] = botao
         tela.close()
         return user
 
-    def detalhes(self, func):
-       tela = TelaDetalhes(func)
+    def detalhes(self, user):
+       tela = TelaDetalhes(user)
        tela.show()
        tela.close()

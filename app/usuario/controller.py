@@ -7,16 +7,19 @@ from .model import User
 class UserController:
     def __init__(self):
         self.view = view.TelaUsuarios()
-        if os.path.isfile('funcionarios.pkl'):
-            self.users = pickle.load(open('funcionarios.pkl', 'rb'))
+        if os.path.isfile('usuarios.pkl'):
+            self.users = pickle.load(open('usuarios.pkl', 'rb'))
         else: 
             self.users = {}
+    def save_users(self):
+        pickle.dump(self.users, open('usuarios.pkl', 'wb'))
     
     def registrar(self, username, password):
         if username in self.users.keys():
             return None
         user = User(username, password)
         self.users[username] =  user
+        self.save_users()
         return user
 
     def autenticar(self, username, password):

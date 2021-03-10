@@ -1,3 +1,3 @@
 {
-    "python.pythonPath": "/mnt/Data/home/gcabral/UFSC/2020.2/aps/aps/.env/bin/python3.8"
+    "python.pythonPath": "venv/bin/python"
 }

@@ -16,9 +16,9 @@ class TelaDetalhes(AbstractTela):
     def __init__(self, user):
         self.window = Window('Autenticação de Usuário').layout(
             [
-                [Text(f'Usuário: \t{user.username}')],
-                [Text(f'Senha: \t{user.password}')],
-                [Text(f'Data inserção: \t{user.date}')],
+                [Text(f'Usuário: {user.username}')],
+                [Text(f'Senha: {user.password}')],
+                [Text(f'Data inserção: {user.date}')],
                 [Button('Ok')]
             ]
         )
