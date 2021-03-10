@@ -12,6 +12,16 @@ class TelaSelecao(AbstractTela):
             ]
         )
 
+class TelaMenu(AbstractTela):
+    def __init__(self):
+        self.window = Window('Seleção de lista').layout(
+            [
+                [Text('O que você deseja fazer?')],
+                [Text('Gerenciar Listas'), Button('1')],
+                [Text('Criar nova Lista'), Button("2")],
+            ]
+        )
+
 class TelaDetalhes(AbstractTela):
     def __init__(self, _list: List):
         layout = [
@@ -27,6 +37,17 @@ class TelaDetalhes(AbstractTela):
         self.window = Window(f'Detalhes da lista: {_list.title}').layout(
             layout +
             [
-                [Button('Voltar'), Button('Remover Item da lista')]
+                [Button('Voltar'), Button('Remover Item da lista'), Button('Deletar lista')]
+            ]
+        )
+
+
+class TelaCriacao(AbstractTela):
+    def __init__(self):
+        self.window = Window('Criação de lista').layout(
+            [
+                [Text('Titulo: '), Input(key='title')],
+                [Text('Descrição: '), Input(key='description')],
+                [Button('Voltar'), Button('Cadastrar')]
             ]
         )

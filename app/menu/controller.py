@@ -27,7 +27,7 @@ class ControlePrincipal:
                     if add_to_list:
                         self.list_controller.add_item_to_list(movie, auth_user)
             elif option == '2':
-                action = self.list_controller.list_details(auth_user)
+                action = self.list_controller.menu(auth_user)
             else:
                 return
         # while True:

@@ -2,7 +2,7 @@ from .view import ListsView
 from app.movie.controller import MovieController
 
 from .model import List
-
+from app.usuario.model import User
 class ListController:
     def __init__(self):
         self.lists_view = ListsView()
@@ -24,6 +24,15 @@ class ListController:
         if res[0] == 'S':
             _list.add_item(item)
     
+    def menu(self, user):
+        option = self.lists_view.menu()
+        if option == '1':
+            self.list_details(user)
+        elif option == '2':
+            self.create_list(user)
+        else:
+            return
+
     def list_details(self, user):
         _list = self.select_list(user)
         if not _list:
@@ -31,6 +40,8 @@ class ListController:
         action = self.lists_view.list_details(_list)
         if action == 'Remover Item da lista':
             self.remove_item_from_list(_list)
+        elif action == 'Deletar lista':
+            self.delete_list(_list, user)
         return action
         
     def remove_item_from_list(self, _list: List):
@@ -60,3 +71,21 @@ class ListController:
                     del _list.items[selected_movie.imdbID]
                 return
                 
+    def delete_list(self, _list: List, user):
+        res = self.lists_view.confirmacao(f'Deletar lista {_list.title}')
+        if res[0] == 'S':
+            del _list.items
+            del user.lists[_list._id]
+            return
+                    
+    def create_list(self, user: User):
+        data = self.lists_view.create_list()
+        if data is None:
+            return
+        for _list in user.lists.values():
+            if _list.title == data['title']:
+                self.lists_view.excecao('Já existe uma lista com esse Título')
+                return None
+        new_list = List(**data)
+        user.add_list(new_list)
+        return
