@@ -37,7 +37,7 @@ class TelaDetalhes(AbstractTela):
         self.window = Window(f'Detalhes da lista: {_list.title}').layout(
             layout +
             [
-                [Button('Voltar'), Button('Remover Item da lista'), Button('Deletar lista')]
+                [Button('Voltar'), Button('Remover Item da lista'), Button('Deletar lista'), Button('Editar lista')]
             ]
         )
 
@@ -49,5 +49,14 @@ class TelaCriacao(AbstractTela):
                 [Text('Titulo: '), Input(key='title')],
                 [Text('Descrição: '), Input(key='description')],
                 [Button('Voltar'), Button('Cadastrar')]
+            ]
+        )
+
+class TelaEdicao(AbstractTela):
+    def __init__(self):
+        self.window = Window('Edição de lista').layout(
+            [
+                [Text('Novo titulo: '), Input(key='title')],
+                [Button('Atualizar'), Button('Voltar')]
             ]
         )

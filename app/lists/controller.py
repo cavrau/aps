@@ -42,7 +42,17 @@ class ListController:
             self.remove_item_from_list(_list)
         elif action == 'Deletar lista':
             self.delete_list(_list, user)
+        elif action == 'Editar lista':
+            self.edit_list(_list, user)
         return action
+
+    def edit_list(self, _list: List, user: User):
+        data = self.lists_view.edit_list(_list)
+        if data is None:
+            return
+        else:
+            print(data)
+            _list.title = data['title']
         
     def remove_item_from_list(self, _list: List):
         page = 1
