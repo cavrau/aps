@@ -4,21 +4,23 @@ from datetime import date
 from . import view
 from .model import User
 
+
 class UserController:
     def __init__(self):
         self.view = view.TelaUsuarios()
         if os.path.isfile('usuarios.pkl'):
             self.users = pickle.load(open('usuarios.pkl', 'rb'))
-        else: 
+        else:
             self.users = {}
+
     def save_users(self):
         pickle.dump(self.users, open('usuarios.pkl', 'wb'))
-    
+
     def registrar(self, username, password):
-        if username in self.users.keys():
+        if not username or not password or username in self.users.keys():
             return None
         user = User(username, password)
-        self.users[username] =  user
+        self.users[username] = user
         self.save_users()
         return user
 
@@ -38,13 +40,14 @@ class UserController:
             if action == 'Registrar':
                 user = self.registrar(**user_dict)
                 if not user:
-                    self.view.excecao('Já existe um usuário com esse nome.')
+                    self.view.excecao('Usuário já existente ou inválido.')
                 else:
                     invalid = False
             elif action == 'Login':
                 user = self.autenticar(**user_dict)
                 if not user:
-                    self.view.excecao('Não foi encontrado usuário com esse nome e senha.')
+                    self.view.excecao(
+                        'Não foi encontrado usuário com esse nome e senha.')
                 else:
                     invalid = False
             else:
@@ -53,6 +56,3 @@ class UserController:
 
     def details(self, user):
         self.view.detalhes(user)
-        
-         
-
