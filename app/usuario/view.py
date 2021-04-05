@@ -2,6 +2,7 @@ from abstracts.abstract_view import AbstractView
 from .screens import *
 validator = {}
 
+
 class TelaUsuarios(AbstractView):
     def __init__(self):
         self.__validator = validator
@@ -14,6 +15,7 @@ class TelaUsuarios(AbstractView):
         return user
 
     def detalhes(self, user):
-       tela = TelaDetalhes(user)
-       tela.show()
-       tela.close()
+        tela = TelaDetalhes(user)
+        action, dic = tela.show()
+        tela.close()
+        return action

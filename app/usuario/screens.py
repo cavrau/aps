@@ -19,7 +19,7 @@ class TelaDetalhes(AbstractTela):
                 [Text(f'Usuário: {user.username}')],
                 [Text(f'Senha: {user.password}')],
                 [Text(f'Data inserção: {user.date}')],
-                [Button('Ok')]
+                [Button('Voltar'), Button('Trocar Conta'), Button('Excluir')]
             ]
         )
         

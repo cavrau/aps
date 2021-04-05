@@ -3,6 +3,7 @@ from app.movie.controller import MovieController
 from app.lists.controller import ListController
 from .view import MenuView
 
+
 class ControlePrincipal:
     def __init__(self):
         self.user_controller = UserController()
@@ -19,8 +20,10 @@ class ControlePrincipal:
 
             option = self.menu_view.menu_switch()
             if option == '0':
-                self.user_controller.details(auth_user)
-            elif option=='1':
+                change_account = self.user_controller.details(auth_user)
+                if change_account:
+                    auth_user = self.user_controller.login()
+            elif option == '1':
                 movie = self.movie_controller.search_movie()
                 if movie:
                     add_to_list = self.movie_controller.movie_details(movie)

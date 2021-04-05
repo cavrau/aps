@@ -54,5 +54,27 @@ class UserController:
                 return
         return user
 
+    def excluir(self, user):
+        if not user.username in self.users.keys():
+            return None
+        self.users.pop(user.username)
+        self.save_users()
+        return True
+
     def details(self, user):
-        self.view.detalhes(user)
+        invalid = True
+        while invalid:
+            action = self.view.detalhes(user)
+            print(action)
+            if action == 'Excluir':
+                result = self.excluir(user)
+                if not result:
+                    self.view.excecao(
+                        'Não foi possível realizar a exclusão.')
+                else:
+                    invalid = False
+                    return True
+            elif action == 'Trocar Conta':
+                return True
+            else:
+                return
