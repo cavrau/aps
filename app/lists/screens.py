@@ -32,7 +32,9 @@ class TelaDetalhes(AbstractTela):
         ]
         for item in _list.items.values():
             layout += [
-                [Text(item.title)]    
+                [Text(f'Título: {item.title}')],
+                [Text(f'Comentário: {item.comentario}')],
+                [Text(f'Nota: {item.nota}')]    
             ]
         self.window = Window(f'Detalhes da lista: {_list.title}').layout(
             layout +
