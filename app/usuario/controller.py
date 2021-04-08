@@ -61,11 +61,19 @@ class UserController:
         self.save_users()
         return True
 
+    def alterar_senha(self, user, nova_senha):
+        if not user.username in self.users.keys():
+            return None
+        user = self.users[user.username]
+        user.change_password(nova_senha)
+
+        self.save_users()
+        return True
+
     def details(self, user):
         invalid = True
         while invalid:
             action = self.view.detalhes(user)
-            print(action)
             if action == 'Excluir':
                 result = self.excluir(user)
                 if not result:
@@ -76,5 +84,11 @@ class UserController:
                     return True
             elif action == 'Trocar Conta':
                 return True
+            elif action == 'Alterar senha':
+                nova_senha = self.view.alterar_senha(user)
+                result = self.alterar_senha(user, nova_senha)
+                if not result:
+                    self.view.excecao(
+                        'Não foi possível alterar a senha.')
             else:
                 return

@@ -16,6 +16,12 @@ class TelaUsuarios(AbstractView):
 
     def detalhes(self, user):
         tela = TelaDetalhes(user)
-        action, dic = tela.show()
+        botao, dic = tela.show()
         tela.close()
-        return action
+        return botao
+
+    def alterar_senha(self, user):
+        tela = TelaAlterarSenha(user)
+        botao, user = tela.show()
+        tela.close()
+        return user["password"]
