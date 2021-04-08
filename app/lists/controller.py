@@ -1,5 +1,7 @@
 from .view import ListsView
 from app.movie.controller import MovieController
+from app.avaliacoes.controller import AvaliacaoController
+from app.movie.model import Movie, Series
 
 from .model import List
 from app.usuario.model import User
@@ -7,6 +9,7 @@ class ListController:
     def __init__(self):
         self.lists_view = ListsView()
         self.movies_controller = MovieController() 
+        self.avaliacoes_controller = AvaliacaoController()
     
     def select_list(self, user):
         title = self.lists_view.select_list(user.lists.values())
@@ -20,7 +23,20 @@ class ListController:
         _list = self.select_list(user)
         if not _list:
             return
-        res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
+        if _list.title == 'Já assistidos':
+            rating = self.avaliacoes_controller.add_rating()
+
+            nota = rating.get_grade()
+            comment = rating.get_comment()
+            
+            item.set_nota(nota)
+            item.set_comentario(comment)
+            
+            res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
+            if res[0] == 'S':
+                _list.add_item(item)
+        else:
+            res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
         if res[0] == 'S':
             _list.add_item(item)
     

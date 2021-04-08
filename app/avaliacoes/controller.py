@@ -1,13 +1,13 @@
 from .model import Rating
 from .view import RatingViews
 
-class classificacaoController:
+class AvaliacaoController:
     def __init__(self):
-        self.__avaliacoes_view = AvaliacoesView()
+        self.__avaliacoes_view = RatingViews()
 
     def add_rating(self):
-        user_rate = self.__avaliacoes_view.add_rating()
-        rating = Rating(user_rate[comentario], user_rate[nota])
+        data = self.__avaliacoes_view.add_rating()
+        rating = Rating(data['comentario'], data['nota'])
         return rating
     
     def get_comment(self, rating: Rating):

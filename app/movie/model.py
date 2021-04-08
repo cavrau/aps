@@ -31,6 +31,14 @@ class Movie:
                     else:
                         return
                 self.plot = self.plot[:index] + '\n' + self.plot[index+1:]
+        self.nota = 0
+        self.comentario = ''
+
+    def set_nota(self, nota):
+        self.nota = nota
+        
+    def set_comentario(self, comentario):
+        self.comentario = comentario
 
 class Series(Movie):
     def __init__(self, totalSeasons, *args, **kwargs):
