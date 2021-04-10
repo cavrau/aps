@@ -61,13 +61,19 @@ class UserController:
         self.save_users()
         return True
 
-    def alterar_senha(self, user, nova_senha):
+    def alterar_senha(self, user, nova_senha, senha_antiga):
         if not user.username in self.users.keys():
             return None
         user = self.users[user.username]
-        user.change_password(nova_senha)
+        if senha_antiga != user.get_senha():
+            return None
+        user.set_senha(nova_senha)
 
         self.save_users()
+        return True
+
+    # usar return retornar_ao_login(), usado pra quebrar o loop da tela e resetar a aplicação pro estado inicial
+    def retornar_ao_login(self):
         return True
 
     def details(self, user):
@@ -80,13 +86,12 @@ class UserController:
                     self.view.excecao(
                         'Não foi possível realizar a exclusão.')
                 else:
-                    invalid = False
-                    return True
+                    return self.retornar_ao_login()
             elif action == 'Trocar Conta':
-                return True
+                return self.retornar_ao_login()
             elif action == 'Alterar senha':
-                nova_senha = self.view.alterar_senha(user)
-                result = self.alterar_senha(user, nova_senha)
+                nova_senha, senha_antiga = self.view.alterar_senha(user)
+                result = self.alterar_senha(user, nova_senha, senha_antiga)
                 if not result:
                     self.view.excecao(
                         'Não foi possível alterar a senha.')

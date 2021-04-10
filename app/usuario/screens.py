@@ -30,7 +30,7 @@ class TelaAlterarSenha(AbstractTela):
     def __init__(self, user):
         self.window = Window('Alterar senha').layout(
             [
-                [Text(f'Senha atual: {user.password}')],
+                [Text(f'Senha atual: '), Input(key='old_password')],
                 [Text('Nova senha: '), Input(key='password')],
                 [Button('Voltar'), Button('Confirmar')]
             ]

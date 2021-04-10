@@ -24,4 +24,4 @@ class TelaUsuarios(AbstractView):
         tela = TelaAlterarSenha(user)
         botao, user = tela.show()
         tela.close()
-        return user["password"]
+        return user["password"], user["old_password"]
