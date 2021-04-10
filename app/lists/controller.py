@@ -31,10 +31,13 @@ class ListController:
             
             item.set_nota(nota)
             item.set_comentario(comment)
-            
             res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
             if res[0] == 'S':
                 _list.add_item(item)
+                if user.goal:
+                    if user.goal.genre in item.genre:
+                        user.goal.progress += 1
+                
         else:
             res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
         if res[0] == 'S':

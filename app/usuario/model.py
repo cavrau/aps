@@ -10,6 +10,7 @@ class User:
         self.lists = {}
         self.points = 0
         self.rankings = {}
+        self.goal = None
         self.add_list(
             List('Para assistir', 'Filmes/Séries que ainda tenho que assistir'))
         self.add_list(List('Os melhores Filmes',
