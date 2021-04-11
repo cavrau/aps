@@ -21,3 +21,11 @@ Rodar aplicação
 `
 [python init.py]
 `
+## Responsáveis
+
+- UC03 manter lista: Diovana
+- UC06 classificar e avaliar um filme ou série: Diovana
+- UC05 pesquisar filme: Gabriel
+- UC09 criar meta: Gabriel
+- UC01 fazer login: Felipe
+- UC02 manter conta: Felipe
