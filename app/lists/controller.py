@@ -25,7 +25,8 @@ class ListController:
             return
         if _list.title == 'Já assistidos':
             rating = self.avaliacoes_controller.add_rating()
-
+            if rating is None:
+                return
             nota = rating.get_grade()
             comment = rating.get_comment()
             
@@ -69,6 +70,8 @@ class ListController:
         data = self.lists_view.edit_list(_list)
         if data is None:
             return
+        elif _list.title == 'Já assistidos':
+            self.lists_view.excecao('Você não pode editar a lista assistidos')
         else:
             print(data)
             _list.title = data['title']
