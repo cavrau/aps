@@ -33,9 +33,11 @@ class TelaDetalhes(AbstractTela):
         for item in _list.items.values():
             layout += [
                 [Text(f'Título: {item.title}')],
-                [Text(f'Comentário: {item.comentario}')],
-                [Text(f'Nota: {item.nota}')]    
             ]
+            layout += [
+                [Text(f'Comentário: {item.rating.comment}')],
+                [Text(f'Nota: {item.rating.grade}')]    
+            ] if hasattr(item, 'rating') and item.rating is not None else []
         self.window = Window(f'Detalhes da lista: {_list.title}').layout(
             layout +
             [

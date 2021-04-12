@@ -27,11 +27,8 @@ class ListController:
             rating = self.avaliacoes_controller.add_rating()
             if rating is None:
                 return
-            nota = rating.get_grade()
-            comment = rating.get_comment()
-            
-            item.set_nota(nota)
-            item.set_comentario(comment)
+
+            item.rating = rating
             res = self.lists_view.confirmacao(f'Adicionar item {item.title} a lista {_list.title}')
             if res[0] == 'S':
                 _list.add_item(item)

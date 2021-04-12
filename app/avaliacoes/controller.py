@@ -10,11 +10,4 @@ class AvaliacaoController:
         if data is None:
             return
         else:
-            rating = Rating(data['comentario'], data['nota'])
-            return rating
-    
-    def get_comment(self, rating: Rating):
-        return rating.get_comment()
-    
-    def get_grade(self, rating: Rating):
-        return rating.get_grade()
+            return Rating(data['comentario'], data['nota'])
