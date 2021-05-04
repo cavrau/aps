@@ -2,6 +2,7 @@ from app.usuario.controller import UserController
 from app.movie.controller import MovieController
 from app.lists.controller import ListController
 from app.goal.controller import GoalController
+from app.avaliacoes.controller import AvaliacaoController
 from .view import MenuView
 
 
@@ -12,6 +13,7 @@ class ControlePrincipal:
         self.menu_view = MenuView()
         self.list_controller = ListController()
         self.goal_controller = GoalController()
+        self.avaliacoes_controller = AvaliacaoController()
 
     def inicializar(self):
         auth_user = self.user_controller.login()
@@ -36,6 +38,8 @@ class ControlePrincipal:
                 action = self.list_controller.menu(auth_user)
             elif option == '3':
                 action = self.goal_controller.goal(auth_user)
+            elif option == '4':
+                action = self.avaliacoes_controller.add_rating(auth_user)
             else:
                 return
         # while True:

@@ -9,6 +9,7 @@ class MenuScreen(AbstractTela):
             [Text('Pesquisar filme'), Button('1')],
             [Text('Ver listas'), Button('2')],
             [Text('Ver meta'), Button('3')],
+            [Text('Avaliar filme ou série'), Button('4')],
             [Button('Sair')]
         ]
         self.window = Window('Cinefilia').Layout(layout)

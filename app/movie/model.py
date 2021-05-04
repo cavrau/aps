@@ -33,8 +33,14 @@ class Movie:
                 self.plot = self.plot[:index] + '\n' + self.plot[index+1:]
         self.rating = None
 
+    def set_rating(self, rating):
+        self.rating = rating
+
 class Series(Movie):
     def __init__(self, totalSeasons, *args, **kwargs):
         self.total_seasons = totalSeasons
         super(Series, self).__init__(*args, **kwargs)
+    
+    def set_rating(self, rating):
+        self.rating = rating
 

@@ -11,3 +11,17 @@ class TelaRating(AbstractTela):
                 [Button('Voltar'), Button('Avaliar')]
             ]
         )
+
+class TelaShowItens(AbstractTela):
+    def __init__(self, _list):
+        layout = []
+        for item in _list.items.values():
+            layout += [
+                [Button(f'{item.title}')],
+            ]
+        self.window = Window('Selecione um item').layout(
+            layout +
+            [
+                [Button('Voltar')]
+            ]
+        )
