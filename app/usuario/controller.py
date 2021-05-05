@@ -16,6 +16,11 @@ class UserController:
     def save_users(self):
         pickle.dump(self.users, open('usuarios.pkl', 'wb'))
 
+    def user_exists(self, user):
+        if not user.username in self.users.keys():
+            return False
+        return True
+
     def registrar(self, username, password):
         if not username or not password or username in self.users.keys():
             return None
@@ -55,22 +60,24 @@ class UserController:
         return user
 
     def excluir(self, user):
-        if not user.username in self.users.keys():
-            return None
+        if not self.user_exists(user):
+            return False, "O usuário não existe"
         self.users.pop(user.username)
         self.save_users()
         return True
 
     def alterar_senha(self, user, nova_senha, senha_antiga):
-        if not user.username in self.users.keys():
-            return None
+        if not self.user_exists(user):
+            return False, "O usuário não existe"
+        if nova_senha == "":
+            return False, "A senha não pode ficar em branco."
         user = self.users[user.username]
         if senha_antiga != user.get_senha():
-            return None
+            return False, "Senha atual providenciada está incorreta"
         user.set_senha(nova_senha)
 
         self.save_users()
-        return True
+        return True, ""
 
     # usar return retornar_ao_login(), usado pra quebrar o loop da tela e resetar a aplicação pro estado inicial
     def retornar_ao_login(self):
@@ -91,9 +98,10 @@ class UserController:
                 return self.retornar_ao_login()
             elif action == 'Alterar senha':
                 nova_senha, senha_antiga = self.view.alterar_senha(user)
-                result = self.alterar_senha(user, nova_senha, senha_antiga)
-                if not result:
+                changed, message = self.alterar_senha(
+                    user, nova_senha, senha_antiga)
+                if not changed:
                     self.view.excecao(
-                        'Não foi possível alterar a senha.')
+                        message)
             else:
                 return
