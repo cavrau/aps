@@ -10,10 +10,15 @@ class RatingViews(AbstractView):
             return None
         elif data['nota'] in ['', ' ', None] or data['comentario'] in ['', ' ', None]:
             self.excecao('Preencha os campos comentário e nota')
-        elif type(int(data['nota'])) is not int:
-            self.excecao('O campo nota precisa ser um numero inteiro')
-        elif button == 'Avaliar':
-            return data
+        elif data is not None:
+            try:
+                _data = int(data['nota'])
+                if _data < 0 or _data > 10:
+                    self.excecao('O campo nota não pode ser menor que 0 ou maior que 10')
+                else:
+                    return data
+            except ValueError:
+                self.excecao('O campo nota precisa ser um inteiro')
     
     def show_itens(self, _list):
         tela = TelaShowItens(_list)
