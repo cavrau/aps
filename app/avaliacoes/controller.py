@@ -3,7 +3,7 @@ from .view import RatingViews
 from app.lists.controller import ListController
 from app.movie.model import Movie, Series
 
-class AvaliacaoController:
+class RatingController:
     def __init__(self):
         self.__avaliacoes_view = RatingViews()
         self.__list_controller = ListController()
