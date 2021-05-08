@@ -20,7 +20,7 @@ class User:
     def add_list(self, _list):
         self.lists[_list._id] = _list
 
-    def get_senha(self, ):
+    def get_senha(self):
         return self.password
 
     def set_senha(self, new_password):

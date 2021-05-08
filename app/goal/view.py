@@ -16,7 +16,7 @@ class GoalView(AbstractView):
                 data['objetivo'] = int(data['objetivo'])
                 assert data['genre'] in genres and data['objetivo'] > 0
             except Exception:
-                self.excecao('Tipo invalido de dado inserido')
+                self.excecao('Tipo invalido de dado inserido. Os valores de prazo e objetivo devem ser números inteiros e maiores que 0.')
             else:
                 break
         return data
